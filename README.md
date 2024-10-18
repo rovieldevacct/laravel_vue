@@ -1,66 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+###READ ME###
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This was created with laravel with vue js for front end and MySql for database.
+To start using this, you will need to set up a database preferably PHPMYADMIN as that's the one I used.
+Set up the database config in .env file.
+run the command php artisan migrate:fresh --seed to use some random data. This will run the creation of the following tables:
+1. Users table and other authentication related tables.
+2. migrations table
+3. products table
+4. product category table
 
-## About Laravel
+This will generate a random data using the faker library.
+Users table will generate 30 random users and 2 fixed users which will serve as admin users.
+Account details of 2 fixed users is:
+1. user: roviel@gmail.com pass: @dmin1234
+2. user: roviel2@gmail.com pass: @dmin1234
+Those 2 users will have access_control 1 and the rest of the users will have access_control 2.
+At the moment there's no configuration of the uses of the access_control column but it is there for access level accounts for future use.
+Product Category table will generate 10 random data.
+Products table will generate 100 random data.
+Per product there will be 1 category_id that will be set using the pluck method to capture random id from the product_category table.
+You can see those configs on the factories folder.
+Access the project via localhost and select where you want to login or create a user.
+###LOGINS###
+-Creating a new user uses the email address as the login credentials.
+-Login using the newly added user or use the admin accounts
+Once logged in, you can see the Products dashboard.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+###DASHBOARD###
+Design is very simple and I didn't use the adminLTE template as I just want to make this clean and simple.
+Fronend uses VUE with vue-router in it so it doesn't reload pages each time you select an action.
+In the products table, you can add, edit or delete records.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+###ADD NEW###
+Clicking add new will show the add new page which you can add new records.
+-You can set a product name with a max of 100 characters in the serverside validations.
+-Product category can be selected using a dropdown from the product_category table
+-Description can have a max of 100 characters as well.
+*If by any chance the random data that was generated using the migrations --seed has exceeded 100 characters it is because the faker library that I used
+generates random sentences and I didn't include a max limit to it for testing purposes only.
+-Clicking save will redirect you to the products listing where it shows the newly added data.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+###EDIT###
+Clicking the edit button will redirect you to the edit page
+-All data will show on the selected record.
+-Validation is the same from the add new records which is 100 character limit.
+-Clicking save will notify the user that the data is saved but will not redirect to the product listing page for verifications of the data.
 
-## Learning Laravel
+###DELETE###
+Clicking delete will show a pop-up notification to verify if you want to continue the deletion of data.
+-Clicking yes will delete the record.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+###NOT INCLUDED###
+Search function was not included yet.
+Pagination was not included yet.
+Sorting of data not included yet.
+updating of user data.
+change password.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+###INCLUDED###
+Auth routing was included.
+Create, update, delete only.
+Registration of new users.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+###CLOSING REMARKS###
+The project was kind-of a mess actually because of the dependency that was needed in some bits of the program which I gradually keep on adding
+resulting some conflicts that's why I got little time to explore and update it. I had a lot of plans in mind but I need to finish this ASAP that's why design is very simple 
+and compact.
